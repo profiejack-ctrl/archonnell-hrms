@@ -7,10 +7,10 @@ export default defineConfig(({ mode }) => {
     const gateway = env.VITE_GATEWAY_URL || 'https://api.archonnellincorporated.com';
 
     return {
-        base: './',
+        base: '/',
         plugins: [react()],
         build: {
-            outDir: '../app',
+            outDir: 'dist',
             emptyOutDir: true,
             sourcemap: false,
             rollupOptions: {
