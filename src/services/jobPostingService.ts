@@ -42,7 +42,23 @@ type Saved = { posting: JobPosting; message: string };
 
 /** Recruitment Management > Job Posting. */
 export const jobPostingService = {
-    page: () => api.get<JobPostingsPage>('page_job_postings'),
+    page: async (): Promise<JobPostingsPage> => {
+        const res = await api.get<Partial<JobPostingsPage>>('page_job_postings');
+        // Keep optional or omitted lookup collections safe for pages/forms that map them.
+        return {
+            postings: (Array.isArray(res.postings) ? res.postings : []).map(posting => ({
+                ...posting,
+                status: ['Draft', 'Published', 'Closed', 'Archived'].includes(String(posting.status)) ? posting.status : 'Draft',
+                applicant_count: Number(posting.applicant_count) || 0,
+            })),
+            departments: Array.isArray(res.departments) ? res.departments : [],
+            positions: Array.isArray(res.positions) ? res.positions : [],
+            employment_types: Array.isArray(res.employment_types) ? res.employment_types : [],
+            work_setups: Array.isArray(res.work_setups) ? res.work_setups : [],
+            default_location: res.default_location ?? '',
+            approved_requests: Array.isArray(res.approved_requests) ? res.approved_requests : [],
+        };
+    },
     detail: (id: number) => api.get<{ posting: JobPosting; applicants: JobPostingApplicant[]; vacancy_request: VacancyRequest | null }>('job_posting_detail', { id }),
     /** The form rendered exactly as the public job page will show it. */
     preview: (form: JobPostingForm, postingNo = '') =>

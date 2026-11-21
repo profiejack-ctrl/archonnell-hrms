@@ -42,10 +42,33 @@ export interface RoleMatrix {
 
 /** User Management, Roles and Permissions (Administration). */
 export const userService = {
-    directoryPage: () => api.get<UserDirectoryPage>('page_user_directory'),
+    directoryPage: async (): Promise<UserDirectoryPage> => {
+        const res = await api.get<Partial<UserDirectoryPage>>('page_user_directory');
+        const cards: Partial<DirectoryCards> = res.cards ?? {};
+        return {
+            cards: {
+                total_users: Number(cards.total_users) || 0,
+                active_accounts: Number(cards.active_accounts) || 0,
+                deactivated_accounts: Number(cards.deactivated_accounts) || 0,
+                active_departments: Number(cards.active_departments) || 0,
+            },
+            users: Array.isArray(res.users) ? res.users : [],
+            departments: Array.isArray(res.departments) ? res.departments : [],
+            positions: Array.isArray(res.positions) ? res.positions : [],
+            roles: Array.isArray(res.roles) ? res.roles : [],
+        };
+    },
     directoryCards: () => api.get<{ cards: DirectoryCards }>('user_directory'),
     view: (id: number) => api.get<{ user: DirectoryUser & { full_name: string | null; employment_status: string | null } }>('view_user', { id }),
-    registerPage: () => api.get<RegisterUserPage>('page_register_user'),
+    registerPage: async (): Promise<RegisterUserPage> => {
+        const res = await api.get<Partial<RegisterUserPage>>('page_register_user');
+        return {
+            employees: Array.isArray(res.employees) ? res.employees : [],
+            departments: Array.isArray(res.departments) ? res.departments : [],
+            positions: Array.isArray(res.positions) ? res.positions : [],
+            roles: Array.isArray(res.roles) ? res.roles : [],
+        };
+    },
     register: (input: UserInput & { employee_id: string | number }) =>
         api.post<{ message: string; username: string; default_password: string; employee_no: string; email_sent: boolean; email_error: string | null }>(
             'register_system_user', { ...input },
@@ -54,10 +77,19 @@ export const userService = {
     toggleStatus: (userId: number) => api.post<{ message: string; status: string }>('toggle_user_status', { user_id: userId }),
     archive: (userId: number) => api.post<{ message: string }>('archive_user', { user_id: userId }),
 
-    rolesPage: () => api.get<RoleMatrix>('page_roles'),
+    rolesPage: async (): Promise<RoleMatrix> => {
+        const res = await api.get<Partial<RoleMatrix>>('page_roles');
+        return {
+            roles: Array.isArray(res.roles) ? res.roles : [],
+            permissions: Array.isArray(res.permissions) ? res.permissions : [],
+            grants: Array.isArray(res.grants) ? res.grants : [],
+        };
+    },
     saveRoleMatrix: (checked: string[]) => api.post<{ message: string }>('save_role_matrix', { perm: checked }),
-    permissionsPage: () =>
-        api.get<{ permissions: { id: number; permission_name: string; description: string | null; role_count: number }[] }>('page_permissions'),
+    permissionsPage: async () => {
+        const res = await api.get<{ permissions?: { id: number; permission_name: string; description: string | null; role_count: number }[] }>('page_permissions');
+        return { permissions: Array.isArray(res.permissions) ? res.permissions : [] };
+    },
     createPermission: (name: string, description: string) =>
         api.post<{ message: string }>('create_permission', { permission_name: name, description }),
 };

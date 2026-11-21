@@ -21,7 +21,21 @@ export interface OnboardingUpdate {
 }
 
 export const onboardingService = {
-    page: () => api.get<OnboardingPage>('page_onboarding'),
+    page: async (): Promise<OnboardingPage> => {
+        const res = await api.get<Partial<OnboardingPage>>('page_onboarding');
+        const charts: Partial<OnboardingCharts> = res.charts ?? {};
+        return {
+            rows: Array.isArray(res.rows) ? res.rows : [],
+            contract_statuses: Array.isArray(res.contract_statuses) ? res.contract_statuses : [],
+            departments: Array.isArray(res.departments) ? res.departments : [],
+            positions: Array.isArray(res.positions) ? res.positions : [],
+            charts: {
+                department_hires: Array.isArray(charts.department_hires) ? charts.department_hires : [],
+                hires_over_time: Array.isArray(charts.hires_over_time) ? charts.hires_over_time : [],
+                total_new_hires: Number(charts.total_new_hires) || 0,
+            },
+        };
+    },
     charts: () => api.get<{ data: OnboardingCharts }>('onboarding_charts'),
     update: (input: OnboardingUpdate) => api.post<{ message: string }>('update_onboarding', { ...input }),
 };

@@ -66,7 +66,15 @@ const params = (f: ReportFilters): Record<string, string> => ({ ...f });
 
 /** Reports: live database reports, previewed here and generated as PDF / Excel by export-report.php. */
 export const reportService = {
-    options: () => api.get<ReportOptions>('report_options'),
+    options: async (): Promise<ReportOptions> => {
+        const res = await api.get<Partial<ReportOptions>>('report_options');
+        return {
+            types: Array.isArray(res.types) ? res.types : [],
+            periods: Array.isArray(res.periods) ? res.periods : [],
+            departments: Array.isArray(res.departments) ? res.departments : [],
+            positions: Array.isArray(res.positions) ? res.positions : [],
+        };
+    },
     preview: (f: ReportFilters) => api.get<{ report: ReportPreview }>('report_preview', params(f)),
     fileUrl: (f: ReportFilters, format: 'pdf' | 'xlsx') => backendUrl(`export-report.php?${new URLSearchParams({ ...params(f), format })}`),
     history: () => api.get<{ reports: GeneratedReport[] }>('report_history'),

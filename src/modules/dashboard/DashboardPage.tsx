@@ -88,7 +88,7 @@ export default function DashboardPage() {
                                         items={(data.recruitment_trend?.items ?? []).map(t => ({ label: t.label, value: t.count }))} />
                                 </Card>
                                 <Card className="analytics-card" title="Department Distribution" subtitle="Employee distribution per department">
-                                    {!data.dept_distribution?.items.length ? (
+                                    {!data.dept_distribution?.items?.length ? (
                                         <div className="empty-state" style={{ padding: '2rem 1rem' }}>
                                             <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>No employees yet - hire an applicant to see department distribution.</p>
                                         </div>
