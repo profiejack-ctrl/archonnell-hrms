@@ -133,7 +133,7 @@ export default function UserDirectoryPage() {
             {data && (
                 <>
                     <StatsGrid>
-                        <StatCard icon={Users} gradient={['#60a5fa', '#3b82f6']} value={<span id="udTotalUsers">{num(data.cards.total_users)}</span>} label="Total Users" />
+                        <StatCard icon={Users} gradient={['#a65e46', '#07203f']} value={<span id="udTotalUsers">{num(data.cards.total_users)}</span>} label="Total Users" />
                         <StatCard icon={ShieldCheck} gradient={['#34d399', '#10b981']} value={<span id="udActiveAccounts">{num(data.cards.active_accounts)}</span>} label="Active Accounts" />
                         <StatCard icon={UserX} gradient={['#f87171', '#ef4444']} value={<span id="udDeactivatedAccounts">{num(data.cards.deactivated_accounts)}</span>} label="Deactivated Accounts" />
                         <StatCard icon={Building2} gradient={['#a78bfa', '#8b5cf6']} value={<span id="udActiveDepartments">{num(data.cards.active_departments)}</span>} label="Active Departments" />

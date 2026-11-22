@@ -274,7 +274,7 @@ export default function ApplicantValidationPage() {
             {data && (
                 <>
                     <StatsGrid>
-                        <StatCard icon={Inbox} gradient={['#60a5fa', '#3b82f6']} value={data.stats.new} label="New Applicants" />
+                        <StatCard icon={Inbox} gradient={['#a65e46', '#07203f']} value={data.stats.new} label="New Applicants" />
                         <StatCard icon={ClipboardList} gradient={['#fbbf24', '#f59e0b']} value={data.stats.reviewing} label="Under Review" />
                         <StatCard icon={CalendarDays} gradient={['#a78bfa', '#8b5cf6']} value={data.stats.scheduled} label="Scheduled for Pre-Interview" />
                     </StatsGrid>

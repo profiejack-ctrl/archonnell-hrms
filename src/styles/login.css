@@ -133,8 +133,8 @@
     padding: 0.75rem;
     font-size: 1rem;
     font-weight: 600;
-    color: #ffffff;
-    background: linear-gradient(135deg, #1e3a5f, #2563eb);
+    color: var(--text-on-accent);
+    background: linear-gradient(135deg, var(--primary), var(--accent));
     border: none;
     border-radius: var(--radius-md);
     cursor: pointer;
@@ -244,15 +244,15 @@
 /* "Resend code" - Royal Blue gradient matching primary button */
 .btn-verify-resend,
 .btn-verify-primary {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: var(--text-on-accent);
     box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
 }
 
 .btn-verify-resend:hover,
 .btn-verify-primary:hover {
-    background: linear-gradient(135deg, #1d4ed8, #1e40af);
-    color: #ffffff;
+    background: linear-gradient(135deg, var(--accent), var(--primary-light));
+    color: var(--text-on-accent);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
 }
@@ -261,6 +261,15 @@
 .btn-verify-primary:active {
     transform: translateY(0);
     box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2);
+}
+
+body.dark .btn-submit,
+body.dark .btn-verify-resend,
+body.dark .btn-verify-primary,
+body.dark .btn-verify-resend:hover,
+body.dark .btn-verify-primary:hover {
+    background: var(--accent);
+    color: var(--text-on-accent);
 }
 
 @media (max-width: 480px) {

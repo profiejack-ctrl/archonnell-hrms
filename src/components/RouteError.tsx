@@ -36,7 +36,7 @@ export default function RouteError() {
                 <h1 style={{ fontSize: 22, margin: '12px 0 8px', color: '#111827' }}>{title}</h1>
                 <p style={{ fontSize: 15, lineHeight: 1.6, color: '#4b5563', margin: '0 0 20px' }}>{text}</p>
                 <div style={{ display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
-                    <button type="button" style={{ ...button, background: '#2563eb', color: '#fff', borderColor: '#2563eb' }} onClick={() => window.location.reload()}>
+                    <button type="button" style={{ ...button, background: '#a65e46', color: '#fff', borderColor: '#a65e46' }} onClick={() => window.location.reload()}>
                         <RotateCw size={16} aria-hidden="true" /> {chunk ? 'Reload' : 'Retry'}
                     </button>
                     <a href="#/" style={{ ...button, background: '#fff', color: '#111827', textDecoration: 'none' }} onClick={() => { window.location.hash = '#/'; window.location.reload(); }}>

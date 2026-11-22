@@ -76,7 +76,7 @@
 }
 .archon-swal-btn:focus-visible { outline: 2px solid var(--accent, #2563eb); outline-offset: 2px; }
 
-.archon-swal-btn--primary { background: var(--accent, #2563eb); color: #ffffff; }
+.archon-swal-btn--primary { background: var(--accent, #2563eb); color: var(--text-on-accent, #ffffff); }
 .archon-swal-btn--primary:hover { opacity: 0.9; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
 
 .archon-swal-btn--danger { background: var(--danger, #ef4444); color: #ffffff; }

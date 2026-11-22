@@ -166,7 +166,7 @@ export default function EmployeeDirectoryPage() {
             {data && w && dist && (
                 <>
                     <StatsGrid>
-                        <StatCard icon={Users} gradient={['#2563eb', '#1e40af']} value={<span id="hcmStatTotal">{num(w.total)}</span>} label="Total Employees" />
+                        <StatCard icon={Users} gradient={['#a65e46', '#07203f']} value={<span id="hcmStatTotal">{num(w.total)}</span>} label="Total Employees" />
                         <StatCard icon={Crown} gradient={['#10b981', '#059669']} value={<span id="hcmStatActive">{num(w.active)}</span>} label="Active" />
                         <StatCard icon={UserMinus} gradient={['#f59e0b', '#d97706']} value={<span id="hcmStatOnLeave">{num(w.on_leave)}</span>} label="On Leave" />
                         <StatCard icon={Building2} gradient={['#8b5cf6', '#7c3aed']} value={<span id="hcmStatDepts">{num(w.depts)}</span>} label="Departments" />

@@ -33,15 +33,15 @@
 }
 /* "Use a different account" - Sleek Slate/Navy gradient */
 .btn-verify-cancel {
-    background: linear-gradient(135deg, #475569, #334155) !important;
-    color: #ffffff !important;
+    background: var(--primary) !important;
+    color: var(--text-on-accent) !important;
     box-shadow: 0 2px 6px rgba(51, 65, 85, 0.25) !important;
 }
 .btn-verify-cancel:hover {
-    background: linear-gradient(135deg, #334155, #1e293b) !important;
+    background: var(--primary) !important;
     box-shadow: 0 4px 12px rgba(30, 41, 59, 0.35) !important;
     transform: translateY(-1px) !important;
-    color: #ffffff !important;
+    color: var(--text-on-accent) !important;
 }
 .btn-verify-cancel:active {
     transform: translateY(0) !important;
@@ -49,19 +49,24 @@
 }
 /* "Resend code" - Royal Blue gradient matching primary button */
 .btn-verify-resend {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
-    color: #ffffff !important;
+    background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
+    color: var(--text-on-accent) !important;
     box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25) !important;
 }
 .btn-verify-resend:hover {
-    background: linear-gradient(135deg, #1d4ed8, #1e40af) !important;
+    background: linear-gradient(135deg, var(--accent), var(--primary-light)) !important;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
     transform: translateY(-1px) !important;
-    color: #ffffff !important;
+    color: var(--text-on-accent) !important;
 }
 .btn-verify-resend:active {
     transform: translateY(0) !important;
     box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2) !important;
+}
+body.dark .btn-verify-resend,
+body.dark .btn-verify-resend:hover {
+    background: var(--accent) !important;
+    color: var(--text-on-accent) !important;
 }
 @media (max-width: 480px) {
     .verify-actions {

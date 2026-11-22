@@ -5,3 +5,4 @@ vendor/
 .env.*
 !.env.example
 *.log
+roland_changes.md

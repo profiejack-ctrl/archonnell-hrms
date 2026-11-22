@@ -105,7 +105,7 @@ export function Badge({ variant, children, style }: { variant: string; children:
 }
 
 /** Five-colour avatar palette cycled per table row, as in the legacy tables. */
-export const ROW_PALETTE: [string, string][] = [['#dbeafe', '#2563eb'], ['#d1fae5', '#10b981'], ['#fef3c7', '#f59e0b'], ['#ede9fe', '#8b5cf6'], ['#fce7f3', '#ec4899']];
+export const ROW_PALETTE: [string, string][] = [['#ebded4', '#07203f'], ['#f3e7df', '#a65e46'], ['#fef3c7', '#f59e0b'], ['#ede9fe', '#8b5cf6'], ['#fce7f3', '#ec4899']];
 
 /** Avatar + name cell used by most tables. */
 export function PersonCell({ index, name }: { index: number; name: ReactNode }) {

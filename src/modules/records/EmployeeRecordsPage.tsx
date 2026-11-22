@@ -37,6 +37,7 @@ export default function EmployeeRecordsPage() {
     const [docs, setDocs] = useState<{ state: 'loading' | 'error' | 'ready'; message?: string; items?: Record<DocType, EmployeeDocument[]> }>({ state: 'loading' });
     const [uploadType, setUploadType] = useState<DocType>('resume');
     const [uploading, setUploading] = useState(false);
+    const [exporting, setExporting] = useState(false);
     const fileRef = useRef<HTMLInputElement>(null);
 
     const counts = data?.doc_counts ?? {};
@@ -68,6 +69,37 @@ export default function EmployeeRecordsPage() {
             return;
         }
         window.location.href = backendUrl(`download-employee-documents-zip.php?employee_id=${encodeURIComponent(String(employeeId))}`);
+    };
+
+    const exportEmployees = async () => {
+        setExporting(true);
+        try {
+            const token = localStorage.getItem('archon_token') || '';
+            const response = await fetch(backendUrl('export-employees.php'), {
+                headers: { Accept: 'text/csv, application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+                credentials: 'include',
+                cache: 'no-store',
+            });
+            if (!response.ok) {
+                const body = await response.json().catch(() => ({})) as { message?: string; error?: { message?: string } };
+                throw new Error(body.message || body.error?.message || `Export failed (${response.status}).`);
+            }
+            const blob = await response.blob();
+            const disposition = response.headers.get('Content-Disposition') || '';
+            const filename = disposition.match(/filename\*?=(?:UTF-8''|\")?([^;\"]+)/i)?.[1]?.trim() || 'employees.csv';
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = decodeURIComponent(filename.replace(/^\"|\"$/g, ''));
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+        } catch (err) {
+            await ArchonAlert.error(err instanceof Error ? err.message : 'Could not export employees.');
+        } finally {
+            setExporting(false);
+        }
     };
 
     const upload = async () => {
@@ -113,8 +145,8 @@ export default function EmployeeRecordsPage() {
                             <ClearFilters id="recordsClear" active={filters.active} onClear={filters.clear} />
                             <FilterCount shown={view.rows.length} total={view.total} />
                         </div>
-                        <button className="btn btn-primary" id="btnExportEmployees" onClick={() => { window.location.href = backendUrl('export-employees.php'); }}>
-                            <Icon as={FileSpreadsheet} /> Export
+                        <button type="button" className="btn btn-primary" id="btnExportEmployees" onClick={() => void exportEmployees()} disabled={exporting}>
+                            <Icon as={FileSpreadsheet} /> {exporting ? 'Exporting…' : 'Export'}
                         </button>
                     </div>
                     <div className="card hover-card">

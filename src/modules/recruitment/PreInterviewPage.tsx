@@ -91,7 +91,7 @@ export default function PreInterviewPage() {
             {data && (
                 <>
                     <StatsGrid>
-                        <StatCard icon={CalendarCheck} gradient={['#60a5fa', '#3b82f6']} value={data.stats.scheduled_today} label="Scheduled Today" />
+                        <StatCard icon={CalendarCheck} gradient={['#a65e46', '#07203f']} value={data.stats.scheduled_today} label="Scheduled Today" />
                         <StatCard icon={Clock} gradient={['#a78bfa', '#8b5cf6']} value={data.stats.total} label="Total Pre-Interview" />
                         <StatCard icon={CircleArrowRight} gradient={['#34d399', '#10b981']} value={data.stats.proceeded_to_final} label="Proceeded to Final" />
                     </StatsGrid>

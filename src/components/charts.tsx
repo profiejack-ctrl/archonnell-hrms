@@ -21,7 +21,7 @@ function useDelayedValue(target: number, delay: number): number {
 }
 
 export const TREND_GRADIENTS: [string, string][] = [
-    ['#60a5fa', '#2563eb'], ['#34d399', '#10b981'], ['#fbbf24', '#f59e0b'],
+    ['#d9aa90', '#a65e46'], ['#34d399', '#10b981'], ['#fbbf24', '#f59e0b'],
     ['#a78bfa', '#8b5cf6'], ['#f472b6', '#ec4899'], ['#22d3ee', '#06b6d4'],
 ];
 
@@ -174,8 +174,8 @@ export function DepartmentBarChart({ items, wrapperRef }: { items: DepartmentHir
                 <defs>
                     {items.map((item, i) => (
                         <linearGradient key={i} id={`deptGrad_${uid}_${i}`} x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor={item.color || '#2563eb'} stopOpacity="1" />
-                            <stop offset="100%" stopColor={item.color || '#2563eb'} stopOpacity="0.75" />
+                            <stop offset="0%" stopColor={item.color || '#a65e46'} stopOpacity="1" />
+                            <stop offset="100%" stopColor={item.color || '#a65e46'} stopOpacity="0.75" />
                         </linearGradient>
                     ))}
                 </defs>
@@ -206,7 +206,7 @@ export function DepartmentBarChart({ items, wrapperRef }: { items: DepartmentHir
                                     onMouseLeave={hide} onBlur={hide} />
                             ) : (
                                 <rect className="chart-bar-rect" x={barX} y={margin.top + plotH - 2} width={barW} height="2" rx="1" ry="1"
-                                    fill={item.color || '#2563eb'} opacity="0.3"
+                                    fill={item.color || '#a65e46'} opacity="0.3"
                                     onMouseEnter={e => show(e.currentTarget, fullDept, 0)} onMouseLeave={hide} />
                             )}
                             {count > 0 && <text className="chart-bar-badge" x={barX + barW / 2} y={barY - 6}>{count}</text>}
@@ -269,9 +269,9 @@ export function HiresLineChart({ items, wrapperRef }: { items: HiresOverTime[]; 
             <svg className="chart-svg" viewBox={`0 0 ${SVG_W} ${SVG_H}`} preserveAspectRatio="xMidYMid meet">
                 <defs>
                     <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#2563eb" stopOpacity="0.35" />
-                        <stop offset="65%" stopColor="#2563eb" stopOpacity="0.10" />
-                        <stop offset="100%" stopColor="#2563eb" stopOpacity="0.0" />
+                        <stop offset="0%" stopColor="#a65e46" stopOpacity="0.35" />
+                        <stop offset="65%" stopColor="#a65e46" stopOpacity="0.10" />
+                        <stop offset="100%" stopColor="#a65e46" stopOpacity="0.0" />
                     </linearGradient>
                 </defs>
                 {ticks.map(t => {

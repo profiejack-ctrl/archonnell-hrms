@@ -88,7 +88,7 @@ export default function ProfilePage() {
             {data && (
                 <div className="profile-container">
                     <div className="profile-sidebar hover-card">
-                        <div className="profile-avatar" style={{ background: 'linear-gradient(135deg, #2563eb, #1e40af)' }}>
+                        <div className="profile-avatar" style={{ background: 'linear-gradient(135deg, #07203f, #a65e46)' }}>
                             <Icon as={UserRound} style={{ color: 'white' }} />
                         </div>
                         <h3 className="profile-name">{name}</h3>
@@ -106,7 +106,7 @@ export default function ProfilePage() {
                             </div>
                             {empNo !== '' && (
                                 <div className="profile-stat">
-                                    <div className="stat-num" style={{ color: '#2563eb', fontSize: '0.95rem' }}>{empNo}</div>
+                                    <div className="stat-num" style={{ color: '#a65e46', fontSize: '0.95rem' }}>{empNo}</div>
                                     <div className="stat-label">Employee ID</div>
                                 </div>
                             )}

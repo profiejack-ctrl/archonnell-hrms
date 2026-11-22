@@ -191,7 +191,7 @@ export default function VacancyRequestsPage() {
                     <StatsGrid>
                         <StatCard icon={Clock} gradient={['#fbbf24', '#f59e0b']} value={count('Pending')} label="Pending Approval" />
                         <StatCard icon={CheckCircle2} gradient={['#34d399', '#10b981']} value={count('Approved')} label="Approved" />
-                        <StatCard icon={Briefcase} gradient={['#60a5fa', '#3b82f6']} value={list.filter(r => r.status === 'Approved' && !r.job_posting_id).length} label="Awaiting Job Posting" />
+                        <StatCard icon={Briefcase} gradient={['#a65e46', '#07203f']} value={list.filter(r => r.status === 'Approved' && !r.job_posting_id).length} label="Awaiting Job Posting" />
                         <StatCard icon={XCircle} gradient={['#f87171', '#ef4444']} value={count('Rejected')} label="Rejected" />
                     </StatsGrid>
                     <div className="page-toolbar">

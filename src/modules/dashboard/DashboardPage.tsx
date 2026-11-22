@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Calendar, Megaphone, User, UserPlus, UserSearch, Users } from 'lucide-react';
 import Icon from '../../components/Icon';
 import { Badge, Card, Page, PageHeader, PageState, StatCard, StatsGrid } from '../../components/ui';
@@ -9,7 +10,6 @@ import { announcementService } from '../../services/announcementService';
 import { backendUrl } from '../../services/http';
 import { useAnnouncementViewer } from '../../layouts/AnnouncementViewer';
 import { ANNOUNCEMENTS_REFRESH_EVENT } from '../../layouts/NotificationBell';
-import { ArchonAlert } from '../../utils/alerts';
 import { announceExcerpt, num, phpMj, phpMjY, phpMjYatgiA, parseDbDate } from '../../utils/format';
 
 const RECENT_BADGE: Record<string, string> = {
@@ -19,6 +19,7 @@ const RECENT_BADGE: Record<string, string> = {
 export default function DashboardPage() {
     const { data, loading, error, retry, setData } = usePageData(dashboardService.page);
     const openAnnouncement = useAnnouncementViewer();
+    const navigate = useNavigate();
 
     // The bell's 60 s refresh also keeps this list current (a newly published announcement appears).
     useEffect(() => {
@@ -31,7 +32,7 @@ export default function DashboardPage() {
         return () => window.removeEventListener(ANNOUNCEMENTS_REFRESH_EVENT, onRefresh);
     }, [setData]);
 
-    const exportInfo = () => void ArchonAlert.info('Export is ready to be connected to a CSV/PDF report endpoint.');
+    const exportInfo = () => navigate('/reports');
 
     return (
         <Page id="dashboard">
@@ -77,7 +78,7 @@ export default function DashboardPage() {
                     {data.show_analytics && data.stats && (
                         <>
                             <StatsGrid>
-                                <StatCard icon={UserSearch} gradient={['#2563eb', '#1e40af']} value={num(data.stats.applicants)} label="Total Applicants" trend={data.stats.applicants_trend} />
+                                <StatCard icon={UserSearch} gradient={['#a65e46', '#07203f']} value={num(data.stats.applicants)} label="Total Applicants" trend={data.stats.applicants_trend} />
                                 <StatCard icon={UserPlus} gradient={['#f59e0b', '#d97706']} value={num(data.stats.onboarding)} label="Onboarding Now" trend={data.stats.onboarding_trend} />
                                 <StatCard icon={Users} gradient={['#8b5cf6', '#7c3aed']} value={num(data.stats.employees)} label="Total Employees" trend={data.stats.employees_trend} />
                             </StatsGrid>
@@ -112,8 +113,8 @@ export default function DashboardPage() {
                                                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', padding: '0.5rem 0' }}>No applicants yet.</p>
                                             ) : data.recent_applicants.map((ra, i) => (
                                                 <div className="recent-item hover-item" key={i}>
-                                                    <div className="item-avatar" style={{ background: '#dbeafe' }}>
-                                                        <Icon as={User} style={{ color: '#2563eb' }} />
+                                                    <div className="item-avatar" style={{ background: '#ebded4' }}>
+                                                        <Icon as={User} style={{ color: '#07203f' }} />
                                                     </div>
                                                     <div className="item-content">
                                                         <div className="item-title">{ra.full_name}</div>

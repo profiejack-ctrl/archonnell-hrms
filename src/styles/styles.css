@@ -1,25 +1,26 @@
 :root {
-    --primary: #1e3a5f;
-    --primary-light: #2a4a73;
-    --accent: #2563eb;
-    --accent-light: #dbeafe;
-    --accent-bg: #eff6ff;
+    --primary: #07203f;
+    --primary-light: #02000d;
+    --accent: #a65e46;
+    --accent-light: #ebded4;
+    --accent-bg: #f5ebe5;
+    --text-on-accent: #ffffff;
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
-    --info: #3b82f6;
-    --text-primary: #1f2937;
-    --text-secondary: #4b5563;
-    --text-muted: #9ca3af;
-    --text-sidebar: #374151;
-    --text-sidebar-muted: #6b7280;
-    --bg-primary: #ffffff;
-    --bg-secondary: #f3f4f6;
-    --bg-tertiary: #e5e7eb;
-    --bg-sidebar: #f0f5ff;
-    --bg-header: #e0e7f3;
-    --border: #e5e7eb;
-    --border-light: #f3f4f6;
+    --info: #07203f;
+    --text-primary: #02000d;
+    --text-secondary: #07203f;
+    --text-muted: #59483f;
+    --text-sidebar: #ebded4;
+    --text-sidebar-muted: #d9aa90;
+    --bg-primary: #fffaf7;
+    --bg-secondary: #ebded4;
+    --bg-tertiary: #d9aa90;
+    --bg-sidebar: #07203f;
+    --bg-header: #fffaf7;
+    --border: #d9aa90;
+    --border-light: #ebded4;
     --sidebar-width: 260px;
     --header-height: 80px;
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -33,27 +34,28 @@
 }
 
 body.dark {
-    --primary: #f3f4f6;
-    --primary-light: #e5e7eb;
-    --accent: #60a5fa;
-    --accent-light: #1e3a5f;
-    --accent-bg: #1e293b;
+    --primary: #d9aa90;
+    --primary-light: #a65e46;
+    --accent: #d9aa90;
+    --accent-light: #47302b;
+    --accent-bg: #1c1821;
+    --text-on-accent: #02000d;
     --success: #34d399;
     --warning: #fbbf24;
     --danger: #f87171;
-    --info: #60a5fa;
+    --info: #d9aa90;
     --text-primary: #f3f4f6;
     --text-secondary: #d1d5db;
     --text-muted: #9ca3af;
     --text-sidebar: #e5e7eb;
     --text-sidebar-muted: #9ca3af;
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --bg-tertiary: #334155;
-    --bg-sidebar: #1e293b;
-    --bg-header: #1e293b;
-    --border: #334155;
-    --border-light: #1e293b;
+    --bg-primary: #02000d;
+    --bg-secondary: #07203f;
+    --bg-tertiary: #183654;
+    --bg-sidebar: #02000d;
+    --bg-header: #02000d;
+    --border: #47302b;
+    --border-light: #07203f;
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
@@ -998,8 +1000,8 @@ body.dark .logout-item:hover {
 }
 
 .badge-info {
-    background: #dbeafe;
-    color: #1e40af;
+    background: #ebded4;
+    color: #07203f;
 }
 
 .badge-secondary {
@@ -1171,7 +1173,7 @@ body.dark .badge-secondary {
 
 .btn-primary {
     background: var(--accent);
-    color: #fff;
+    color: var(--text-on-accent);
 }
 
 .btn-primary:hover {
@@ -1616,7 +1618,7 @@ body.dark .badge-secondary {
     border-radius: 50%;
     margin: 0 auto;
     background: conic-gradient(
-        #2563eb 0deg 144deg,
+        #a65e46 0deg 144deg,
         #10b981 144deg 234deg,
         #f59e0b 234deg 306deg,
         #8b5cf6 306deg 360deg
@@ -2036,7 +2038,7 @@ body.dark .badge-secondary {
 /* ========== DONUT CHART CUSTOM COLORS PER ID ========== */
 #applicantDeptChart {
     background: conic-gradient(
-        #2563eb 0deg 126deg,
+        #a65e46 0deg 126deg,
         #10b981 126deg 216deg,
         #f59e0b 216deg 288deg,
         #8b5cf6 288deg 360deg
@@ -2053,7 +2055,7 @@ body.dark .badge-secondary {
 
 #documentDonut {
     background: conic-gradient(
-        #2563eb 0deg 111.6deg,
+        #a65e46 0deg 111.6deg,
         #f59e0b 111.6deg 198deg,
         #06b6d4 198deg 262.8deg,
         #8b5cf6 262.8deg 316.8deg,
@@ -2070,7 +2072,7 @@ body.dark .badge-secondary {
 /* ========== DARK MODE OVERRIDES FOR NEW COMPONENTS ========== */
 body.dark .hover-item:hover {
     background: var(--accent);
-    color: #fff;
+    color: var(--text-on-accent);
 }
 
 body.dark .hover-row:hover {
@@ -2587,7 +2589,7 @@ body.dark .sidebar.collapsed .sidebar-footer .nav-item:hover {
 
 /* ========== DARK MODE OVERRIDES FOR MODALS ========== */
 body.dark .modal-section-title {
-    border-bottom-color: #1e3a5f;
+    border-bottom-color: #07203f;
 }
 
 body.dark .modal-close:hover {
@@ -3646,7 +3648,7 @@ body.dark .logo-link {
    light-on-light and the initials disappeared. */
 .user-avatar-sm,
 body.dark .user-avatar-sm {
-    background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
+    background: linear-gradient(135deg, #07203f, #a65e46) !important;
     color: #ffffff !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }

@@ -230,7 +230,7 @@ export default function TimeAttendancePage() {
                         <>
                             <h2 className="att-period-title" id="attPeriodTitle">{title}</h2>
                             <StatsGrid>
-                                <StatCard icon={Users} gradient={['#60a5fa', '#3b82f6']} value={people} label="Total Employees" />
+                                <StatCard icon={Users} gradient={['#a65e46', '#07203f']} value={people} label="Total Employees" />
                                 <StatCard icon={UserCheck} gradient={['#34d399', '#10b981']} value={count('Present')} label="Present" />
                                 <StatCard icon={Clock} gradient={['#fbbf24', '#f59e0b']} value={count('Late')} label="Late" />
                                 <StatCard icon={UserX} gradient={['#f87171', '#ef4444']} value={count('Absent')} label="Absent" />

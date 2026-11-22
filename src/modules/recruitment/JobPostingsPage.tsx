@@ -204,7 +204,7 @@ export default function JobPostingsPage() {
                 <>
                     <StatsGrid>
                         <StatCard icon={Megaphone} gradient={['#34d399', '#10b981']} value={stats.open} label="Open for Applications" />
-                        <StatCard icon={FilePen} gradient={['#60a5fa', '#3b82f6']} value={stats.drafts} label="Drafts" />
+                        <StatCard icon={FilePen} gradient={['#a65e46', '#07203f']} value={stats.drafts} label="Drafts" />
                         <StatCard icon={Lock} gradient={['#fbbf24', '#f59e0b']} value={stats.closed} label="Closed / Archived" />
                         <StatCard icon={Users} gradient={['#a78bfa', '#8b5cf6']} value={stats.applicants} label="Total Applicants" />
                     </StatsGrid>

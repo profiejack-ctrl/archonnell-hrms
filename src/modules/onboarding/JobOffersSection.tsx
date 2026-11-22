@@ -220,7 +220,7 @@ export default function JobOffersSection({ onHired }: { onHired: () => void }) {
             {data && (
                 <>
                     <StatsGrid>
-                        <StatCard icon={UserRound} gradient={['#60a5fa', '#3b82f6']} value={data.candidates.length} label="Ready for Job Offer" />
+                        <StatCard icon={UserRound} gradient={['#a65e46', '#07203f']} value={data.candidates.length} label="Ready for Job Offer" />
                         <StatCard icon={FileText} gradient={['#94a3b8', '#64748b']} value={count('Draft')} label="Draft Offers" />
                         <StatCard icon={Send} gradient={['#a78bfa', '#7c3aed']} value={count('Extended')} label="Extended (Awaiting Answer)" />
                         <StatCard icon={UserCheck} gradient={['#34d399', '#10b981']} value={count('Accepted')} label="Accepted" />

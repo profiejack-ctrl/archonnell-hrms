@@ -127,7 +127,7 @@ export default function TalentPoolPage() {
                 <>
                     <StatsGrid>
                         <StatCard icon={Users} gradient={['#34d399', '#10b981']} value={list.length} label="In the Talent Pool" />
-                        <StatCard icon={Sparkles} gradient={['#60a5fa', '#3b82f6']} value={count('Active')} label="Available to Contact" />
+                        <StatCard icon={Sparkles} gradient={['#a65e46', '#07203f']} value={count('Active')} label="Available to Contact" />
                         <StatCard icon={Send} gradient={['#a78bfa', '#7c3aed']} value={count('Contacted')} label="Opportunity Offered" />
                         <StatCard icon={Briefcase} gradient={['#fbbf24', '#f59e0b']} value={count('Re-applied')} label="Re-applied (New Application)" />
                     </StatsGrid>

@@ -5,7 +5,7 @@ export default function ArchonLogo({ idSuffix = '', strokeWidth = 2.5 }: { idSuf
         <svg viewBox="0 0 100 100" className="archon-svg">
             <defs>
                 <linearGradient id={id('orbit1')} x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#3b82f6' }} />
+                    <stop offset="0%" style={{ stopColor: '#d9aa90' }} />
                     <stop offset="100%" style={{ stopColor: '#8b5cf6' }} />
                 </linearGradient>
                 <linearGradient id={id('orbit2')} x1="0%" y1="100%" x2="100%" y2="0%">
