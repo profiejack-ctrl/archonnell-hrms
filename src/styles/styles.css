@@ -745,21 +745,21 @@ body .layout-body .sidebar.collapsed .sidebar-footer .nav-item span {
 }
 
 .logout-item {
-    color: var(--text-sidebar);
+    color: #07203f;
     justify-content: flex-start;
 }
 
 .logout-item i {
-    color: var(--danger);
+    color: #07203f;
 }
 
 .logout-item:hover {
     background: #fef2f2;
-    color: var(--danger);
+    color: #07203f;
 }
 
 .logout-item:hover i {
-    color: var(--danger);
+    color: #07203f;
 }
 
 body.dark .logout-item:hover {
