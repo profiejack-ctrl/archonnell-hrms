@@ -3615,6 +3615,14 @@ html body #sidebar.collapsed .sidebar-collapse-btn i { font-size: inherit !impor
 .mobile-menu-toggle svg { width: 24px; height: 24px; stroke-width: 2; }
 @media (max-width: 768px) { .mobile-menu-toggle { display: inline-flex !important; } }
 
+/* Keep Logout's requested navy color across desktop and mobile sidebar overrides. */
+#sidebar .sidebar-footer .nav-item.logout-item,
+#sidebar .sidebar-footer .nav-item.logout-item:hover,
+#sidebar .sidebar-footer .nav-item.logout-item .nav-ico,
+#sidebar .sidebar-footer .nav-item.logout-item:hover .nav-ico {
+    color: #07203f !important;
+}
+
 /* =====================================================================
    Dark mode - header (the header background was hard-coded #fff, so in
    dark mode its light-token text became invisible on white).
