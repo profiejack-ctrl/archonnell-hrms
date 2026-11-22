@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Eye, EyeOff, Lock, LockKeyhole, RefreshCw, User } from 'lucide-react';
 import Icon from '../components/Icon';
-import ArchonLogo from '../components/ArchonLogo';
+import localLogo from '../assets/img/LOGO.png';
 import { authService } from '../services/authService';
 import { ApiError, setCsrfToken } from '../services/http';
 import { useAuth } from '../hooks/AuthContext';
@@ -205,11 +205,11 @@ export default function LoginPage() {
         <div className="login-wrapper">
             <div className="login-card">
                 <div className="login-header">
-                    <div className="logo-icon archon-logo-icon"><ArchonLogo /></div>
-                    <h2 className="login-title">{stage === 'verify' ? 'Verify Your Login' : 'Welcome Back'}</h2>
-                    <p className="login-subtitle">
-                        {stage === 'verify' ? `Enter the 6-digit code we e-mailed to ${maskedEmail}` : 'Sign in to access the Archon Nell Incorporated'}
-                    </p>
+                    <div className="archon-login-logo"><img src={localLogo} alt="Archon Nell Incorporated" /></div>
+                    {stage === 'verify' ? <>
+                        <h2 className="login-title">Verify Your Login</h2>
+                        <p className="login-subtitle">Enter the 6-digit code we e-mailed to {maskedEmail}</p>
+                    </> : <p className="login-subtitle login-brand-subtitle">Performance &amp; Development Management</p>}
                 </div>
 
                 {ready && stage === 'verify' && (
@@ -258,10 +258,10 @@ export default function LoginPage() {
                     <>
                         <form autoComplete="off" id="loginForm" noValidate onSubmit={onLogin}>
                             <div className="form-group">
-                                <label className="form-label" htmlFor="identifier">Username or Email</label>
+                                <label className="form-label" htmlFor="identifier">Email</label>
                                 <div className="input-group">
                                     <Icon as={User} />
-                                    <input type="text" id="identifier" name="identifier" className="form-control" placeholder="Enter your username or email"
+                                    <input type="text" id="identifier" name="identifier" className="form-control" placeholder="you@company.com"
                                         required autoFocus aria-required="true" value={identifier} onChange={e => setIdentifier(e.target.value)} />
                                 </div>
                             </div>
@@ -278,11 +278,12 @@ export default function LoginPage() {
                                 </div>
                             </div>
                             <button type="submit" className={`btn-submit${busy ? ' is-loading' : ''}`} id="submitBtn" disabled={busy}>
-                                <span className="btn-text">Log In</span>
+                                <span className="btn-text">Sign In</span>
+                                <span className="login-submit-arrow" aria-hidden="true">→</span>
                                 <span className="btn-spinner" aria-hidden="true"></span>
                             </button>
                         </form>
-                        <p className="login-footer-note">A 6-digit verification code will be e-mailed to your registered address to complete sign-in.</p>
+                        <p className="login-footer-note">© 2026 Archon Nell. All rights reserved.</p>
                     </>
                 )}
             </div>

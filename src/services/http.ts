@@ -7,9 +7,11 @@
  * - Supports CSRF token compatibility and inactivity timeout tracking.
  */
 
-/** Centralized Backend API Gateway URL for HRMS */
+/** Primary backend plus an optional fallback (for example, local then cloud). */
 export const API_BASE: string = (import.meta.env.VITE_API_URL as string | undefined) || 'https://api.archonnellincorporated.com/api/v1/hrms';
+const API_FALLBACK_BASE: string = (import.meta.env.VITE_API_FALLBACK_URL as string | undefined) || '';
 export const AUTH_BASE: string = (import.meta.env.VITE_AUTH_URL as string | undefined) || 'https://api.archonnellincorporated.com/api/v1/auth';
+const AUTH_FALLBACK_BASE: string = (import.meta.env.VITE_AUTH_FALLBACK_URL as string | undefined) || '';
 export const GATEWAY_BASE: string = (import.meta.env.VITE_GATEWAY_URL as string | undefined) || 'https://api.archonnellincorporated.com';
 
 /** URL of a backend file or stored upload (e.g. "uploads/announcements/x.jpg"). */
@@ -63,15 +65,39 @@ async function parse<T>(response: Response, notify401: boolean): Promise<T> {
     return data as T;
 }
 
+/** Retry a second backend only when the primary is unavailable or returns a server error.
+ * Authentication and validation errors are returned directly, so invalid credentials
+ * never cause an unexpected login attempt against another environment.
+ */
+async function requestWithFallback<T>(primaryUrl: string, fallbackUrl: string, init: RequestInit, notify401: boolean): Promise<T> {
+    let response: Response;
+    try {
+        response = await fetch(primaryUrl, init);
+    } catch (error) {
+        if (!fallbackUrl || fallbackUrl === primaryUrl) throw error;
+        response = await fetch(fallbackUrl, init);
+        return parse<T>(response, notify401);
+    }
+
+    if (fallbackUrl && fallbackUrl !== primaryUrl && response.status >= 500) {
+        // Release the primary response body before trying the fallback.
+        await response.body?.cancel();
+        response = await fetch(fallbackUrl, init);
+    }
+    return parse<T>(response, notify401);
+}
+
 export interface GetOptions { passive?: boolean; notify401?: boolean }
 
 /** GET request routed through Central HRMS Bridge */
-export async function httpGet<T>(_file: string, action: string, params: Record<string, string | number> = {}, opts: GetOptions = {}): Promise<T> {
+export async function httpGet<T>(file: string, action: string, params: Record<string, string | number> = {}, opts: GetOptions = {}): Promise<T> {
     const qs = new URLSearchParams({ action, ...Object.fromEntries(Object.entries(params).map(([k, v]) => [k, String(v)])) });
     const token = localStorage.getItem('archon_token') || '';
 
-    const url = `${API_BASE}/bridge?${qs.toString()}`;
-    const response = await fetch(url, {
+    const base = file === 'auth-api.php' ? AUTH_BASE : API_BASE;
+    const fallbackBase = file === 'auth-api.php' ? AUTH_FALLBACK_BASE : API_FALLBACK_BASE;
+    const suffix = `/bridge?${qs.toString()}`;
+    return requestWithFallback(`${base}${suffix}`, fallbackBase ? `${fallbackBase}${suffix}` : '', {
         headers: {
             Accept: 'application/json',
             ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -79,17 +105,19 @@ export async function httpGet<T>(_file: string, action: string, params: Record<s
         },
         credentials: 'include',
         cache: 'no-store',
-    });
-    return parse<T>(response, opts.notify401 ?? true);
+    }, opts.notify401 ?? true);
 }
 
 /** POST request routed through Central HRMS Bridge */
-export async function httpPost<T>(_file: string, action: string, fields: Fields = {}, opts: { notify401?: boolean } = {}): Promise<T> {
-    const body = toBody({ action, csrf_token: csrfToken, ...fields });
+export async function httpPost<T>(file: string, action: string, fields: Fields = {}, opts: { notify401?: boolean } = {}): Promise<T> {
     const token = localStorage.getItem('archon_token') || '';
 
-    const url = `${API_BASE}/bridge`;
-    const response = await fetch(url, {
+    const bodyFields = { action, csrf_token: csrfToken, ...fields };
+    const requestBody = () => toBody(bodyFields);
+    const base = file === 'auth-api.php' ? AUTH_BASE : API_BASE;
+    const fallbackBase = file === 'auth-api.php' ? AUTH_FALLBACK_BASE : API_FALLBACK_BASE;
+    const suffix = '/bridge';
+    return requestWithFallback(`${base}${suffix}`, fallbackBase ? `${fallbackBase}${suffix}` : '', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -98,29 +126,30 @@ export async function httpPost<T>(_file: string, action: string, fields: Fields 
             ...(token ? { Authorization: `Bearer ${token}` } : {})
         },
         credentials: 'include',
-        body,
-    });
-    return parse<T>(response, opts.notify401 ?? true);
+        body: requestBody(),
+    }, opts.notify401 ?? true);
 }
 
 /** multipart/form-data upload routed through Central Gateway */
 export async function httpUpload<T>(_file: string, fields: Record<string, string | Blob>): Promise<T> {
-    const fd = new FormData();
-    fd.append('csrf_token', csrfToken);
-    Object.entries(fields).forEach(([k, v]) => fd.append(k, v));
     const token = localStorage.getItem('archon_token') || '';
 
-    const url = `${API_BASE}/bridge`;
-    const response = await fetch(url, {
+    const makeFormData = () => {
+        const fd = new FormData();
+        fd.append('csrf_token', csrfToken);
+        Object.entries(fields).forEach(([k, v]) => fd.append(k, v));
+        return fd;
+    };
+    const suffix = '/bridge';
+    return requestWithFallback(`${API_BASE}${suffix}`, API_FALLBACK_BASE ? `${API_FALLBACK_BASE}${suffix}` : '', {
         method: 'POST',
-        body: fd,
+        body: makeFormData(),
         headers: {
             'X-CSRF-Token': csrfToken,
             ...(token ? { Authorization: `Bearer ${token}` } : {})
         },
         credentials: 'include',
-    });
-    return parse<T>(response, true);
+    }, true);
 }
 
 /** Shortcuts for the main HRMS API */

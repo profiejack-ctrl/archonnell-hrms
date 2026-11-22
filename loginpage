@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Archon Nell - Login</title>
+<!-- Tailwind CSS v3 CDN with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandDark: '#081426',
+            brandCard: '#ffffff',
+            navyBtn: '#0c1a2e',
+            navyBtnHover: '#132846',
+            subtext: '#64748b',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Typography Styles -->
+<style data-purpose="typography">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+  </style>
+<!-- END: Custom Typography Styles -->
+<!-- BEGIN: Layout Utilities -->
+<style data-purpose="layout-adjustments">
+    /* Subtle custom shadow for card matching the reference aesthetic */
+    .login-card-shadow {
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.4), 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+<!-- END: Layout Utilities -->
+</head>
+<body class="bg-[#081426] min-h-screen flex items-center justify-center p-4 antialiased selection:bg-blue-600 selection:text-white">
+<!-- BEGIN: MainLoginCard -->
+<main class="w-full max-w-[448px] bg-white rounded-[22px] login-card-shadow px-9 pt-9 pb-8 text-center" data-purpose="login-container">
+<!-- Company Logo Section -->
+<div class="flex justify-center mb-5" data-purpose="logo-header">
+<img alt="Archon Nell Incorporated Logo" class="h-16 w-auto max-w-[280px] object-contain transition-transform duration-200 hover:scale-[1.01]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApssr9xN8A0b0_hVITgFv3gVGCgBvTt_IFE7BPxoBrj7-vhSRhOKP-Sc9HMCvEmNb12EXgzM9vZTtnpHq1fZRK88GXbw7NzlRyWiq2N4oZ1ueBlWCbOLZg5iU2IJEzB6zO4ti1FcR1ZdTI4qzZhblUsyAQbO8_6BXpTOgMC6AY7Cmn2O8Wrox0JDQJDZlPA2-6v8QWHTnlvIgbaCr8HD_bD_Qtw8p1rzD6FQ1PKa-OhFtv4X9-XDIVrQ"/>
+</div>
+<!-- Application Subtitle -->
+<h1 class="text-[#64748b] text-[14px] font-medium tracking-normal mb-7" data-purpose="subtitle">
+      Performance &amp; Development Management
+    </h1>
+<!-- BEGIN: LoginForm -->
+<form action="#" class="text-left space-y-4" data-purpose="login-form" method="POST">
+<!-- Email Field Group -->
+<div data-purpose="email-field-group">
+<label class="block text-[13px] font-medium text-[#334155] mb-1.5 ml-0.5" for="email">
+          Email
+        </label>
+<div class="relative rounded-lg shadow-sm">
+<!-- Leading Icon -->
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94a3b8]">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<input class="block w-full pl-10 pr-3.5 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-150" id="email" name="email" placeholder="you@company.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field Group -->
+<div data-purpose="password-field-group">
+<label class="block text-[13px] font-medium text-[#334155] mb-1.5 ml-0.5" for="password">
+          Password
+        </label>
+<div class="relative rounded-lg shadow-sm">
+<!-- Leading Icon -->
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#94a3b8]">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<input class="block w-full pl-10 pr-10 py-2.5 bg-[#f8fafc] border border-[#e2e8f0] rounded-lg text-sm text-[#1e293b] placeholder-[#94a3b8] focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all duration-150" id="password" name="password" placeholder="Enter your password" required="" type="password"/>
+<!-- Trailing Password Toggle Button -->
+<button aria-label="Toggle password visibility" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-[#94a3b8] hover:text-[#64748b] transition-colors focus:outline-none" id="togglePassword" type="button">
+<svg class="h-4 w-4" fill="none" id="eyeIcon" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-2">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-[#0a192c] hover:bg-[#122642] text-white text-sm font-semibold rounded-lg shadow-sm transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900 active:scale-[0.99]" type="submit">
+<span>Sign In</span>
+<!-- Arrow Icon -->
+<svg class="h-4 w-4 stroke-[2.2]" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</form>
+<!-- END: LoginForm -->
+<!-- BEGIN: CopyrightFooter -->
+<footer class="mt-8 text-center" data-purpose="copyright">
+<p class="text-[12px] text-[#64748b] font-normal tracking-wide">
+        © 2026 Archon Nell. All rights reserved.
+      </p>
+</footer>
+<!-- END: CopyrightFooter -->
+</main>
+<!-- END: MainLoginCard -->
+<!-- BEGIN: Interactive Logic -->
+<script data-purpose="password-visibility-toggle">
+    document.addEventListener('DOMContentLoaded', () => {
+      const togglePasswordBtn = document.getElementById('togglePassword');
+      const passwordInput = document.getElementById('password');
+
+      if (togglePasswordBtn && passwordInput) {
+        togglePasswordBtn.addEventListener('click', () => {
+          const isPassword = passwordInput.getAttribute('type') === 'password';
+          passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        });
+      }
+    });
+  </script>
+<!-- END: Interactive Logic -->
+</body></html>
