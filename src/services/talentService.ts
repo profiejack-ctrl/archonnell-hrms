@@ -78,9 +78,13 @@ export const HR_FEEDBACK_FIELDS: [string, string][] = [
 export const talentService = {
     rejectedPage: async (): Promise<{ applicants: TalentRow[]; categories: string[] }> => {
         const res = await api.get<any>('page_rejected_applicants');
+        const payload = res?.data && !Array.isArray(res.data) ? res.data : res;
         return {
-            applicants: res?.applicants || (Array.isArray(res?.data) ? res.data : []),
-            categories: res?.categories || REJECTION_CATEGORIES,
+            applicants: Array.isArray(payload?.applicants) ? payload.applicants
+                : Array.isArray(payload?.rejected) ? payload.rejected
+                    : Array.isArray(res?.data) ? res.data : [],
+            categories: Array.isArray(payload?.categories) ? payload.categories
+                : Array.isArray(res?.categories) ? res.categories : REJECTION_CATEGORIES,
         };
     },
     archivedPage: async (): Promise<{ applicants: TalentRow[] }> => {

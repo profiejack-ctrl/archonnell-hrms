@@ -74,10 +74,14 @@ export const applicantService = {
      * Reject one application at the stage the page shows it in, with a required reason.
      * The server validates the reason again and e-mails the applicant after saving.
      */
-    reject: (applicantId: number, stage: RejectionStage, reason: string, extra: Record<string, string | boolean> = {}) =>
-        api.post<{ message: string; rejection_stage: string; email_sent: boolean; email_error: string | null; future_invited?: boolean }>('reject_applicant', {
-            applicant_id: applicantId, stage, reason, ...extra,
-        }),
+    reject: async (applicantId: number, stage: RejectionStage, reason: string, extra: Record<string, string | boolean> = {}) => {
+        const res = await api.post<any>('reject_applicant', { applicant_id: applicantId, stage, reason, ...extra });
+        const result = res?.data && !Array.isArray(res.data) ? { ...res, ...res.data } : res;
+        if (!result?.rejection_stage) {
+            throw new Error('The server did not confirm that the applicant was rejected. The reject_applicant backend action must save the rejection and return its rejection_stage.');
+        }
+        return result as { message: string; rejection_stage: string; email_sent: boolean; email_error: string | null; future_invited?: boolean };
+    },
     schedulePreInterview: (input: ScheduleInput) =>
         api.post<{ message: string; email_sent: boolean; email_error: string | null; confirmation_deadline: string | null }>('schedule_pre_interview', { ...input }),
 };
