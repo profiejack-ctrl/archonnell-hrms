@@ -10,8 +10,11 @@
 /** Primary backend plus an optional fallback (for example, local then cloud). */
 export const API_BASE: string = (import.meta.env.VITE_API_URL as string | undefined) || 'https://api.archonnellincorporated.com/api/v1/hrms';
 const API_FALLBACK_BASE: string = (import.meta.env.VITE_API_FALLBACK_URL as string | undefined) || '';
-export const AUTH_BASE: string = (import.meta.env.VITE_AUTH_URL as string | undefined) || 'https://api.archonnellincorporated.com/api/v1/auth';
-const AUTH_FALLBACK_BASE: string = (import.meta.env.VITE_AUTH_FALLBACK_URL as string | undefined) || '';
+// HRMS auth actions (state/login/verify/logout/me) are implemented by the
+// HRMS compatibility bridge, not the central REST /auth routes.
+const hrmsBridgeBase = (url: string) => url.replace(/\/api\/v1\/auth\/?$/, '/api/v1/hrms');
+export const AUTH_BASE: string = hrmsBridgeBase((import.meta.env.VITE_AUTH_URL as string | undefined) || API_BASE);
+const AUTH_FALLBACK_BASE: string = hrmsBridgeBase((import.meta.env.VITE_AUTH_FALLBACK_URL as string | undefined) || API_FALLBACK_BASE);
 export const GATEWAY_BASE: string = (import.meta.env.VITE_GATEWAY_URL as string | undefined) || 'https://api.archonnellincorporated.com';
 
 /** URL of a backend file or stored upload (e.g. "uploads/announcements/x.jpg"). */
