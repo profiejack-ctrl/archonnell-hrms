@@ -8,8 +8,8 @@
  */
 
 /** Centralized Backend API Gateway URL for HRMS */
-export const API_BASE: string = (import.meta.env.VITE_API_URL as string | undefined) || '/api/v1/hrms';
-export const AUTH_BASE: string = (import.meta.env.VITE_AUTH_URL as string | undefined) || '/api/v1/auth';
+export const API_BASE: string = (import.meta.env.VITE_API_URL as string | undefined) || 'https://api.archonnellincorporated.com/api/v1/hrms';
+export const AUTH_BASE: string = (import.meta.env.VITE_AUTH_URL as string | undefined) || 'https://api.archonnellincorporated.com/api/v1/auth';
 export const GATEWAY_BASE: string = (import.meta.env.VITE_GATEWAY_URL as string | undefined) || 'https://api.archonnellincorporated.com';
 
 /** URL of a backend file or stored upload (e.g. "uploads/announcements/x.jpg"). */
